@@ -94,7 +94,6 @@ public class Main {
                     transactionService.doTransaction(currentCompte2,montant,"DEBIT");
                     Transaction transaction = new Transaction(currentCompte2,montant,"DEBIT");
                     transactions.add(transaction);
-
                     Historique.ajouterTransaction(currentAcc2, transactions);
                     Historique.afficherHistorique(currentAcc2);
 
@@ -117,7 +116,6 @@ public class Main {
                 System.out.println("*** MENU M2iBank *************************************************");
                 System.out.println("*** 4. Afficher les comptes **************************************");
                 compteBancaires.forEach(CompteBancaire::afficherInfos);
-
                 BanqueUtils.afficherMenu();
                 int choix4= BanqueUtils.choisirMenu(getScanner());
                 MainMenu(choix4,getScanner(),compteBancaires,transactions);
@@ -127,7 +125,6 @@ public class Main {
                 System.out.println("******************************************************************");
                 System.out.println("*** MENU M2iBank *************************************************");
                 System.out.println("*** 5.Afficher les transactions **********************************");
-
 
                 if(!compteBancaires.isEmpty())
                 compteBancaires.stream().forEach(compteBancaire1 -> {
@@ -146,8 +143,6 @@ public class Main {
                 BanqueUtils.afficherMenu();
                 int choix5= BanqueUtils.choisirMenu(getScanner());
                 MainMenu(choix5,getScanner(),compteBancaires,transactions);
-
-
                 break;
             case 10:
 
@@ -161,7 +156,6 @@ public class Main {
                 System.out.println("******************************************************************");
                 System.out.println("*** MENU M2iBank *************************************************");
                 System.out.println("*** Aurevoir et a Bientot ****************************************");
-
                 scanner.close();
 
                 break;
