@@ -5,7 +5,7 @@ import com.m2i.atelier.tp6.model.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+public class MainTP6 {
 
 
       static void main (String[] args){
