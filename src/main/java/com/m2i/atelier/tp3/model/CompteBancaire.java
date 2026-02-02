@@ -1,7 +1,6 @@
 package com.m2i.atelier.tp3.model;
 
 import java.util.Optional;
-import java.util.UUID;
 
 public class CompteBancaire {
 
@@ -32,7 +31,7 @@ public class CompteBancaire {
 
         Optional<String> titulaire = Optional.ofNullable(this.titulaire);
 
-        return titulaire.get();
+        return titulaire.orElse("");
     }
     public void setTitulaire(String titulaire) {
         this.titulaire = titulaire;

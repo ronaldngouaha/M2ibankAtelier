@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class Main {
 
 
-    public static void  main(String[] args) {
+      static void  main(String[] args) {
 
         ArrayList<CompteBancaire> compteBancaires = new ArrayList<>();
         ArrayList<Transaction> transactions = new ArrayList<>();
@@ -127,7 +127,7 @@ public class Main {
                 System.out.println("*** 5.Afficher les transactions **********************************");
 
                 if(!compteBancaires.isEmpty())
-                compteBancaires.stream().forEach(compteBancaire1 -> {
+                compteBancaires.forEach(compteBancaire1 -> {
 
                     System.out.println("******************************************************************");
                     compteBancaire1.afficherInfos();
@@ -135,7 +135,7 @@ public class Main {
                     trx=Historique.getTransactions(compteBancaire1.getId());
 
                     if(trx!=null && !trx.isEmpty()){
-                        trx.stream().forEach(Transaction::afficherDetails);
+                        trx.forEach(Transaction::afficherDetails);
                     }
                     System.out.println("******************************************************************");
                 });

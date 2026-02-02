@@ -1,6 +1,5 @@
 package com.m2i.atelier.tp6.model;
 
-import com.m2i.atelier.tp6.model.CustomizeException;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -29,15 +28,13 @@ Incrémente compteur et affecte un ID unique
         this.solde=solde;
         this.titulaire=titulaire;
 
-        long uniqueNum = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-        this.id=uniqueNum;
+        this.id= UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
 
-        compteur+=1;
+      compteur+=1;
 
         ZonedDateTime now = ZonedDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
-        String formattedNow = now.format(formatter);
-        this.createdAt = formattedNow;
+        this.createdAt = now.format(formatter);
 
     }
 
@@ -51,7 +48,9 @@ Incrémente compteur et affecte un ID unique
 
         Optional<String> titulaire = Optional.ofNullable(this.titulaire);
 
-        return titulaire.get();
+
+        return titulaire.orElse("");
+
     }
     public void setTitulaire(String titulaire) {
         this.titulaire = titulaire;

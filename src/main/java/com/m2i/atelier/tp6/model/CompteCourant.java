@@ -2,7 +2,7 @@ package com.m2i.atelier.tp6.model;
 
 public final  class CompteCourant extends CompteBancaire {
 
-    protected double decouvert=0.00;
+    private double decouvert=0.00;
 
 
     public CompteCourant(String titulaire, double solde, double decouvert) {
@@ -14,9 +14,9 @@ public final  class CompteCourant extends CompteBancaire {
 
     @Override
     public void afficherInfos(){
-        System.out.println(String.format(
-                "***Detail Compte COURANT*** -->>ID: %d;  Titulaire %s: Solde: %.2f$; Découvert: %.2f; CreatedAt: %s",
-                this.getId(), this.getTitulaire(), this.getSolde(), this.getDecouvert(),  this.getCreatedAt()));
+        System.out.printf(
+                "***Detail Compte COURANT*** -->>ID: %d;  Titulaire %s: Solde: %.2f$; Découvert: %.2f; CreatedAt: %s%n",
+                this.getId(), this.getTitulaire(), this.getSolde(), this.getDecouvert(),  this.getCreatedAt());
 
     }
 

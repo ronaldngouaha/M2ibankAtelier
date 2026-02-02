@@ -2,7 +2,6 @@ package com.m2i.atelier.tp3.app;
 
 
 import com.m2i.atelier.tp3.model.CompteBancaire;
-import com.m2i.atelier.tp3.model.CustomizeException;
 import com.m2i.atelier.tp3.model.TransactionServiceImpl;
 
 public class TestBank {

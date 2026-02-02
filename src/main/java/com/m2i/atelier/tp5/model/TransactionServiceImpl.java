@@ -1,9 +1,7 @@
 package com.m2i.atelier.tp5.model;
 
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
-import java.util.UUID;
+
 
 
 
@@ -16,7 +14,7 @@ public class TransactionServiceImpl implements TransactionService {
     public void doTransaction(CompteBancaire compteBancaire, double montant, String transactionType) {
 
 
-        double balance=0, oldBalance=compteBancaire.getSolde();
+        double balance, oldBalance=compteBancaire.getSolde();
         // Initialisation de l'objet transaction
         Transaction transaction= new Transaction(compteBancaire,montant,transactionType);
 
@@ -68,7 +66,7 @@ public class TransactionServiceImpl implements TransactionService {
 
             default :
                     System.out.println("***ERROR** ----> TRANSACTION TYPE NOT FOUND");
-            };
+            }
 
     }
 
@@ -81,7 +79,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public void  afficherDetails(Transaction transaction){
         Optional<String> titulaire = Optional.ofNullable(transaction.getCompte().getTitulaire());
-        System.out.println(String.format("***TRX*** -->>ID: %d;  Titulaire %s: Montant: %.2f $, Type: %s; Id: %d; Date: %s", transaction.getId(), titulaire.get(), transaction.getMontant(), transaction.getType(), transaction.getId(), transaction.getDate()));
+        titulaire.ifPresent(s -> System.out.printf("***TRX*** -->>ID: %d;  Titulaire %s: Montant: %.2f $, Type: %s; Id: %d; Date: %s%n", transaction.getId(), s, transaction.getMontant(), transaction.getType(), transaction.getId(), transaction.getDate()));
 
     }
 
@@ -91,9 +89,9 @@ public class TransactionServiceImpl implements TransactionService {
     public void accountTracker(CompteBancaire compteBancaire, Transaction transaction, double oldBalance){
 
         System.out.println("**********************************************************************************************************");
-        System.out.println("");
-        System.out.println(String.format("***MVT**** <<-- Titulaire %s: Solde Avant: %.2f $, Montant: %.2f$ ; New Balance: %.2f$ ; Remark: %s; Date: %s --->", compteBancaire.getTitulaire(), oldBalance, transaction.getMontant(), compteBancaire.getSolde(), transaction.getType(), transaction.getDate()));
-       System.out.println("");
+        System.out.println();
+        System.out.printf("***MVT**** <<-- Titulaire %s: Solde Avant: %.2f $, Montant: %.2f$ ; New Balance: %.2f$ ; Remark: %s; Date: %s --->%n", compteBancaire.getTitulaire(), oldBalance, transaction.getMontant(), compteBancaire.getSolde(), transaction.getType(), transaction.getDate());
+       System.out.println();
         System.out.println("**********************************************************************************************************");
     }
 }

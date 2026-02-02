@@ -51,9 +51,10 @@ public  class BanqueUtils {
 
     public static CompteBancaire trouverCompte(long idCompte, List<CompteBancaire> comptes){
 
-      return   comptes.stream()
-                .filter(compteBancaire -> compteBancaire.getId()==idCompte )
+        CompteBancaire compteBancaire1 = comptes.stream()
+                .filter(compteBancaire -> compteBancaire.getId() == idCompte)
                 .findFirst().get();
+        return compteBancaire1;
 
     }
 

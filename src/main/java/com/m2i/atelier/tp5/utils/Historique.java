@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class Historique {
 
-    private static Map<Long, List<Transaction>> historiqueParCompte = new HashMap<>();
+    private static final Map<Long, List<Transaction>> historiqueParCompte = new HashMap<>();
 
 
     public static void ajouterTransaction(long idCompte, List<Transaction> transaction){

@@ -13,9 +13,9 @@ public non-sealed class CompteEpargne extends CompteBancaire implements  Interet
 
     @Override
     public void afficherInfos(){
-        System.out.println(String.format(
-                "***Detail Compte EPARGNE*** -->>ID: %d;  Titulaire %s: Solde: %.2f$; Taux Interet: %.2f ; CreatedAt: %s",
-                this.getId(), this.getTitulaire(), this.getSolde(), this.getTauxInteret()*100,  this.getCreatedAt()));
+        System.out.printf(
+                "***Detail Compte EPARGNE*** -->>ID: %d;  Titulaire %s: Solde: %.2f$; Taux Interet: %.2f ; CreatedAt: %s%n",
+                this.getId(), this.getTitulaire(), this.getSolde(), this.getTauxInteret()*100,  this.getCreatedAt());
 
     }
 

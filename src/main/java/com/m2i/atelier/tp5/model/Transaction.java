@@ -57,7 +57,7 @@ public class Transaction {
 
     public void  afficherDetails(){
         Optional<String> titulaire = Optional.ofNullable(getCompte().getTitulaire());
-        System.out.println(String.format("***TRX*** -->>ID: %d;  Titulaire %s: Montant: %.2f $, Type: %s; Id: %d; Date: %s", getId(), titulaire.get(), getMontant(), getType(), getId(), getDate()));
+        System.out.printf("***TRX*** -->>ID: %d;  Titulaire %s: Montant: %.2f $, Type: %s; Id: %d; Date: %s%n", getId(), titulaire.orElse("inconnu"), getMontant(), getType(), getId(), getDate());
 
     }
 

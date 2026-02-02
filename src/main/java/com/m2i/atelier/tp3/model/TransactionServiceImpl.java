@@ -1,6 +1,5 @@
 package com.m2i.atelier.tp3.model;
 
-import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
@@ -84,7 +83,7 @@ public class TransactionServiceImpl implements TransactionService{
 
             default :
                     System.out.println("***ERROR** ----> TRANSACTION TYPE NOT FOUND");
-            };
+            }
 
     }
 
@@ -97,7 +96,7 @@ public class TransactionServiceImpl implements TransactionService{
     @Override
     public void  afficherDetails(Transaction transaction){
         Optional<String> titulaire = Optional.ofNullable(transaction.getCompte().getTitulaire());
-        System.out.println(String.format("***TRX*** -->> Titulaire %s: Montant: %.2f $, Type: %s; Id: %d; Date: %s", titulaire.get(), transaction.getMontant(), transaction.getType(), transaction.getId(), transaction.getDate()));
+        titulaire.ifPresent(s -> System.out.printf("***TRX*** -->> Titulaire %s: Montant: %.2f $, Type: %s; Id: %d; Date: %s%n", s, transaction.getMontant(), transaction.getType(), transaction.getId(), transaction.getDate()));
 
     }
 
@@ -107,9 +106,9 @@ public class TransactionServiceImpl implements TransactionService{
     public void accountTracker(CompteBancaire compteBancaire, Transaction transaction,  double oldBalance){
 
         System.out.println("**********************************************************************************************************");
-        System.out.println("");
-        System.out.println(String.format("***MVT**** <<-- Titulaire %s: Solde Avant: %.2f $, Montant: %.2f$ ; New Balance: %.2f$ ; Remark: %s; Date: %s --->", compteBancaire.getTitulaire(), oldBalance, transaction.getMontant(), compteBancaire.getSolde(), transaction.getType(), transaction.getDate()));
-       System.out.println("");
+        System.out.println();
+        System.out.printf("***MVT**** <<-- Titulaire %s: Solde Avant: %.2f $, Montant: %.2f$ ; New Balance: %.2f$ ; Remark: %s; Date: %s --->%n", compteBancaire.getTitulaire(), oldBalance, transaction.getMontant(), compteBancaire.getSolde(), transaction.getType(), transaction.getDate());
+       System.out.println();
         System.out.println("**********************************************************************************************************");
     }
 }
