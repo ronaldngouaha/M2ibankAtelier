@@ -43,45 +43,45 @@ public class M2iBankUtils {
        int menu= M2iBankUtils.choisirMenu(getScanner());
 
        switch (menu){
-           case 1->{
+           case 1->
              //1. Créer un Client
                creerClient();
 
-           }
-           case 2->{
+
+           case 2->
                //2. Créer un Compte
                creerCompte();
-           }
-           case 3 ->{
+
+           case 3 ->
                //3. Effectuer une transaction
 
                effectuerTransaction();
-           }
-           case 4 ->{
+
+           case 4 ->
                //4. Afficher les comptes
                afficherComptes();
-           }
-           case 5 ->{
+
+           case 5 ->
 
                // 5. Afficher l'historique
 
                afficherHistorique();
-           }
-           case 6 ->{
+
+           case 6 ->
                //6. Générer un rapport d'activité
                genererRapport();
-           }
-           case 10 ->{
+
+           case 10 ->
 
                //10. Retour au menu principal
                afficherMenu();
 
 
-           }
-           case 0 ->{
+
+           case 0 ->
 
                deconnexion();
-           }
+
            default -> {
                System.err.println("*** Votre choix ne figure pas dans le menu ******************************");
               afficherMenu();
@@ -130,10 +130,9 @@ public class M2iBankUtils {
     public static   Optional<CompteBancaire> trouverCompte(long idCompte, List<CompteBancaire> comptes){
 
 
-        Optional<CompteBancaire> compteBancaire1= getComptes().stream()
+        return getComptes().stream()
                 .filter(compteBancaire -> compteBancaire.getId() == idCompte)
                 .findFirst();
-        return compteBancaire1;
 
     }
 
@@ -274,9 +273,9 @@ public class M2iBankUtils {
                             System.out.println("*** VIREMENT EFFECTUE AVEC SUCCESS **********************************");
                             transaction.afficherDetails();
                         }
-                        default->{
+                        default->
                             System.err.println("*** Votre choix ne figure pas dans le menu ******************************");
-                        }
+
                     }
 
                 }else{

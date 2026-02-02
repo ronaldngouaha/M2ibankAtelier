@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class HistoriqueOperation {
 
     // Cet attribut contient la liste des transaction sur laquelle nous allons faire des traitements.
-   private  List<Transaction> transactions;
+   private final List<Transaction> transactions;
 
 
    public HistoriqueOperation(){

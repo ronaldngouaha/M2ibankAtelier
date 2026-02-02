@@ -3,7 +3,7 @@ package com.m2i.atelier.tp7.model;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Optional;
+
 import java.util.UUID;
 
 public sealed abstract class CompteBancaire permits CompteCourant, CompteEpargne {
