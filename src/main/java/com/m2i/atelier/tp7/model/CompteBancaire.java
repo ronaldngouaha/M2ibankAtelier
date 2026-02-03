@@ -1,6 +1,8 @@
 package com.m2i.atelier.tp7.model;
 
 
+import com.m2i.atelier.tp8.model.StatutCompte;
+
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -11,6 +13,7 @@ public sealed abstract class CompteBancaire permits CompteCourant, CompteEpargne
 
     private static int compteur=0;
 
+    private StatutCompte statut;
     protected String createdAt;
     protected double solde;
     protected Client client;
@@ -31,6 +34,7 @@ Incrémente compteur et affecte un ID unique
         ZonedDateTime now = ZonedDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
         this.createdAt = now.format(formatter);
+        this.statut=StatutCompte.ACTIF;
     }
 
     public double getSolde() {
@@ -39,9 +43,19 @@ Incrémente compteur et affecte un ID unique
     public void setSolde(double solde) {
         this.solde = solde;
     }
+
+    public void setStatut(StatutCompte statut) {
+        this.statut = statut;
+    }
+
     public long getId() {
         return id;
     }
+
+    public StatutCompte getStatut() {
+        return statut;
+    }
+
     public String getCreatedAt() {
         return createdAt;
     }
@@ -58,8 +72,11 @@ Incrémente compteur et affecte un ID unique
     //Redéfinissez la méthode toString() dans toutes les classes principales
     @Override
     public String toString(){
-        return "Titulaire :"+getClient().getNom()+"; Solde: "+getSolde()+"$; CreatedAt: "+getCreatedAt()+"; ID: "+getId();
+        return "Titulaire :"+getClient().getNom()+"; Solde: "+getSolde()+"$; CreatedAt: "+getCreatedAt()+"; ID: "+getId()+"; Statut: "+getStatut();
 
     }
 
+    abstract class HistoriqueLocal{
+        abstract   void afficherDerniereOperation();
+    }
 }

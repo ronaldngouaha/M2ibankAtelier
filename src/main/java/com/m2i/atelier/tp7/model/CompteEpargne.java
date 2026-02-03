@@ -19,8 +19,8 @@ public non-sealed class CompteEpargne extends CompteBancaire implements InteretC
 
 
         System.out.printf(
-                "***Detail Compte EPARGNE*** -->>ID: %d;  Titulaire %s: Solde: %.2f$; Taux Interet: %.2f ; CreatedAt: %s%n",
-                this.getId(), this.getClient().getNom(), this.getSolde(), this.getTauxInteret()*100,  this.getCreatedAt());
+                "***Detail Compte EPARGNE*** -->>ID: %d;  Titulaire %s: Solde: %.2f$; Taux Interet: %.2f ; CreatedAt: %s; Statut: %s",
+                this.getId(), this.getClient().getNom(), this.getSolde(), this.getTauxInteret()*100,  this.getCreatedAt(), this.getStatut());
 
     }
 
@@ -69,4 +69,8 @@ public non-sealed class CompteEpargne extends CompteBancaire implements InteretC
         // Calcul des intérêts
         solde += solde * tauxInteret / 100;
     }
+
+
+
+
 }

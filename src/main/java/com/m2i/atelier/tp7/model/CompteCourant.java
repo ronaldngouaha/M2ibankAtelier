@@ -17,8 +17,8 @@ public final  class CompteCourant extends CompteBancaire implements OperationBan
     @Override
     public void afficherInfos(){
         System.out.printf(
-                "***Detail Compte COURANT*** -->>ID: %d;  Titulaire %s: Solde: %.2f$; Découvert: %.2f; CreatedAt: %s%n",
-                this.getId(), getClient().getNom(), this.getSolde(), this.getDecouvert(),  this.getCreatedAt());
+                "***Detail Compte COURANT*** -->>ID: %d;  Titulaire %s: Solde: %.2f$; Découvert: %.2f; CreatedAt: %s; Statut: %s",
+                this.getId(), getClient().getNom(), this.getSolde(), this.getDecouvert(),  this.getCreatedAt(), this.getStatut());
 
     }
 
@@ -65,4 +65,6 @@ public final  class CompteCourant extends CompteBancaire implements OperationBan
         // Frais fixes
         solde -= 10.0;
     }
+
+
 }

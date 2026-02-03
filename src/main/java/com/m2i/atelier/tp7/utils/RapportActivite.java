@@ -26,7 +26,7 @@ public  class RapportActivite {
 
         double soldeGlobal = comptes.stream()              // transforme la liste en stream
                 .mapToDouble(CompteBancaire::getSolde) // extrait le solde de chaque compte
-                .sum();
+                .sum();// somme les sommes
 
         System.out.println(">>>>>>Solde global de la banque "+ soldeGlobal+" $");
 
