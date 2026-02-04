@@ -35,8 +35,7 @@ public class MainTP7 {
 
             //ici on affiche les donnees de chaque compte
             compte.afficherInfos();
-            if(compte instanceof OperationBancaire)
-                ((OperationBancaire) compte).appliquerOperation();
+            compte.appliquerOperation();
 
             System.out.println("Après opération :");
             compte.afficherInfos();

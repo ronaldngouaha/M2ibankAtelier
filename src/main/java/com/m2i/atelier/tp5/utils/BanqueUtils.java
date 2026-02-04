@@ -25,12 +25,15 @@ public  class BanqueUtils {
 
     }
 
+    //Cette methode lit un montant dans la console
     public static double saisirMontant(Scanner sc){
           System.out.println("*****************************************************************");
         System.out.println("*** Montant Transaction *****************************************");
        return sc.nextDouble();
     }
 
+    //cette methode retourne une chaine de caractere saisie a la console
+    //@scanner lit recupere une valeur saisir en console par l'utilisateur
     public static String saisirText(Scanner scanner, String message){
         System.out.println("*****************************************************************");
         System.out.println("*** "+message+ " *****************************************");
@@ -51,10 +54,11 @@ public  class BanqueUtils {
 
     public static CompteBancaire trouverCompte(long idCompte, List<CompteBancaire> comptes){
 
-        CompteBancaire compteBancaire1 = comptes.stream()
+        return comptes.stream()
                 .filter(compteBancaire -> compteBancaire.getId() == idCompte)
-                .findFirst().get();
-        return compteBancaire1;
+
+                .findFirst()
+                .orElse(null);
 
     }
 

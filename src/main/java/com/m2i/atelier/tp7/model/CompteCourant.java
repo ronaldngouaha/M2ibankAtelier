@@ -1,8 +1,7 @@
 package com.m2i.atelier.tp7.model;
 
-import com.m2i.atelier.tp7.service.OperationBancaire;
 
-public final  class CompteCourant extends CompteBancaire implements OperationBancaire {
+public final  class CompteCourant extends CompteBancaire  {
 
     private double decouvert=0.00;
 
@@ -64,6 +63,7 @@ public final  class CompteCourant extends CompteBancaire implements OperationBan
     public void appliquerOperation() {
         // Frais fixes
         solde -= 10.0;
+        System.out.println("APPLIQUE  OP DEPUIS COMPTE COURANT");
     }
 
 

@@ -23,13 +23,16 @@ public class MainTP6 {
         // Parcours et appel polymorphe
         for (CompteBancaire compte : comptes) {
             compte.afficherInfos();   // comportement dépend du type réel
+
+            //calcul et affichage de l'intérêt
+            if(compte instanceof CompteEpargne){
+                ((CompteEpargne) compte).afficherInteret();
+            }
             System.out.println("----------------------");
 
             RetraitService retraitService= new RetraitService(compte);
             //Le dépôt et le retrait sont exécutés sans changer le code
             executerService(retraitService, 2000);
-
-
             DepotService depotService = new DepotService(compte);
 
             //Le dépôt et le retrait sont exécutés sans changer le code

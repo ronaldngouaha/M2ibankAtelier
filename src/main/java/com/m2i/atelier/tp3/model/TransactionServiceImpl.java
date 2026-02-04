@@ -1,5 +1,6 @@
 package com.m2i.atelier.tp3.model;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
@@ -19,14 +20,14 @@ public class TransactionServiceImpl implements TransactionService{
         double balance=0, oldBalance=compteBancaire.getSolde();
         // Initialisation de l'objet transaction
         Transaction transaction= new Transaction(compteBancaire);
-        long uniqueNum = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        long uniqueNum = UUID.randomUUID().getLeastSignificantBits() & Long.MIN_VALUE;
         transaction.setId(uniqueNum);
-
 
         ZonedDateTime now = ZonedDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
         String formattedNow = now.format(formatter);
         transaction.setDate(formattedNow);
+
 
         switch (transactionType){
 
@@ -45,19 +46,15 @@ public class TransactionServiceImpl implements TransactionService{
                             this.accountTracker(compteBancaire, transaction, oldBalance);
                         }
 
-
                     }else{
 
 
                         balance=compteBancaire.getSolde()-montant;
-
                         compteBancaire.setSolde(balance);
-
                         afficherDetails(transaction);
 
                         // On va ajouter un suivi sur les mouvements bancaire du compte
                         this.accountTracker(compteBancaire, transaction, oldBalance);
-
 
                     }
 
@@ -96,6 +93,7 @@ public class TransactionServiceImpl implements TransactionService{
     @Override
     public void  afficherDetails(Transaction transaction){
         Optional<String> titulaire = Optional.ofNullable(transaction.getCompte().getTitulaire());
+
         titulaire.ifPresent(s -> System.out.printf("***TRX*** -->> Titulaire %s: Montant: %.2f $, Type: %s; Id: %d; Date: %s%n", s, transaction.getMontant(), transaction.getType(), transaction.getId(), transaction.getDate()));
 
     }

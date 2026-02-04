@@ -1,6 +1,7 @@
 package com.m2i.atelier.tp7.model;
 
 
+import com.m2i.atelier.tp7.service.OperationBancaire;
 import com.m2i.atelier.tp8.model.StatutCompte;
 
 import java.time.ZonedDateTime;
@@ -8,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 
 import java.util.UUID;
 
-public sealed abstract class CompteBancaire permits CompteCourant, CompteEpargne {
+public sealed abstract class CompteBancaire implements OperationBancaire permits CompteCourant, CompteEpargne {
 
 
     private static int compteur=0;

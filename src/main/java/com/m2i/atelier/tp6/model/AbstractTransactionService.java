@@ -14,7 +14,7 @@ public abstract class AbstractTransactionService {
     // methode abstraite
    public abstract void  executerTransaction(double montant);
     public  void afficheSolde(){
-        System.out.printf(" Titulaire: %s; Solde du compte : %.2f$%n",compte.getTitulaire(), compte.getSolde());
+        System.out.printf("Compte:%d; Titulaire: %s; Solde du compte : %.2f$\n",compte.getId(), compte.getTitulaire(), compte.getSolde());
     }
 
 

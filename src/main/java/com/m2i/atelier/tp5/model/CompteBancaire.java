@@ -28,9 +28,7 @@ Incrémente compteur et affecte un ID unique
         this.titulaire=titulaire;
 
         this.id= UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
-
         compteur+=1;
-
         ZonedDateTime now = ZonedDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
         this.createdAt = now.format(formatter);

@@ -1,6 +1,7 @@
 package com.m2i.atelier.tp7.utils;
 
 import com.m2i.atelier.tp7.model.*;
+import com.m2i.atelier.tp8.utils.BanqueUtils;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -47,14 +48,12 @@ public class M2iBankUtils {
              //1. Créer un Client
                creerClient();
 
-
            case 2->
                //2. Créer un Compte
                creerCompte();
 
            case 3 ->
                //3. Effectuer une transaction
-
                effectuerTransaction();
 
            case 4 ->
@@ -62,7 +61,6 @@ public class M2iBankUtils {
                afficherComptes();
 
            case 5 ->
-
                // 5. Afficher l'historique
 
                afficherHistorique();
@@ -72,11 +70,8 @@ public class M2iBankUtils {
                genererRapport();
 
            case 10 ->
-
                //10. Retour au menu principal
                afficherMenu();
-
-
 
            case 0 ->
 
@@ -109,10 +104,6 @@ public class M2iBankUtils {
         System.out.println("*** Faites votre choix SVP ************************************");
         return scanner.nextInt();
     }
-    private static Scanner getScanner(){
-        return  new Scanner(System.in);
-    }
-
 
     public static long demanderIdCompte(Scanner scanner){
         System.out.println("*****************************************************************");
@@ -130,12 +121,15 @@ public class M2iBankUtils {
     public static   Optional<CompteBancaire> trouverCompte(long idCompte, List<CompteBancaire> comptes){
 
 
-        return getComptes().stream()
+        return comptes.stream()
                 .filter(compteBancaire -> compteBancaire.getId() == idCompte)
                 .findFirst();
 
     }
 
+    private static Scanner getScanner(){
+        return  new Scanner(System.in);
+    }
 
 
     //Cette methode permet de creer un client Premium et l'ajoute a la liste des clients
@@ -150,11 +144,8 @@ public class M2iBankUtils {
         String email= saisirText(getScanner(),"SAISISSEZ L'EMAIL DU CLIENT");
 
         ClientPremium clientPremium= new ClientPremium(nomClient,username,email,0.3,2000);
-
         clients.add(clientPremium);
-
         clientPremium.afficherInfos("CLIENT PREMIUM");
-
         M2iBankUtils.afficherMenu();
     }
     //Cette methode permet de creer un compte  et l'ajoute a la liste des comptes
@@ -166,6 +157,7 @@ public class M2iBankUtils {
 
         for(Client client: clients){
 
+            //Affiche la liste de client deja enregistres
             client.afficherInfos("CLIENT PREMIUM");
         }
 
@@ -175,8 +167,8 @@ public class M2iBankUtils {
               .filter(client1 -> client1.getUsername().equals(username))
               .findFirst();
 
-      if(client.isPresent()){
 
+      if(client.isPresent()){
 
           comptes.add(new CompteCourant(client.get(),0, 2000));
           comptes.add(new CompteEpargne(client.get(),0, 0.23));
@@ -193,6 +185,7 @@ public class M2iBankUtils {
           System.err.println("******************************************************************");
       }
 
+      //Retour au menu
         M2iBankUtils.afficherMenu();
 
     }
@@ -251,7 +244,10 @@ public class M2iBankUtils {
 
                             historique.ajouterTransaction(transaction);
                             System.out.println("******************************************************************");
-                            System.out.println("*** DEPOT EFFECTUE AVEC SUCCESS **********************************");
+
+                            //APPEL DE BANQUEUTILS PACQUAGE 8
+                            BanqueUtils.messageOperation(BanqueUtils.typeOperation(typeOp));
+                            System.out.println(BanqueUtils.evaluerMontant(montant));
                             transaction.afficherDetails();
                         }
                         case 2->{
@@ -261,7 +257,10 @@ public class M2iBankUtils {
                             compteBancaire.get().retirer(montant);
                             historique.ajouterTransaction(transaction);
                             System.out.println("******************************************************************");
-                            System.out.println("*** RETRAIT EFFECTUE AVEC SUCCESS **********************************");
+                            //ICI ON AFFICHE UN MESSAGE A LA CONSOLE POUR SIGNALER QUE L 'OPERATION A ETE EFFECTUEE
+                            BanqueUtils.messageOperation(BanqueUtils.typeOperation(typeOp));
+                            //ICI ON EVALUE LE MONTANT DE LA TRANSACTION
+                            System.out.println(BanqueUtils.evaluerMontant(montant));
                             transaction.afficherDetails();
                         }
                         case 3->{
@@ -270,7 +269,8 @@ public class M2iBankUtils {
                             compteBancaire.get().retirer(montant);
                             historique.ajouterTransaction(transaction);
                             System.out.println("******************************************************************");
-                            System.out.println("*** VIREMENT EFFECTUE AVEC SUCCESS **********************************");
+                            BanqueUtils.messageOperation(BanqueUtils.typeOperation(typeOp));
+                            System.out.println(BanqueUtils.evaluerMontant(montant));
                             transaction.afficherDetails();
                         }
                         default->
@@ -322,6 +322,7 @@ public class M2iBankUtils {
         System.out.println("*** 4. Afficher les comptes **************************************");
         comptes.forEach(CompteBancaire::afficherInfos);
 
+        //Retour au menu
         afficherMenu();
 
 
@@ -334,6 +335,7 @@ public class M2iBankUtils {
         System.out.println("*** 6. Générer un rapport d'activité *****************************");
 
         RapportActivite.generer(clients,comptes,historique);
+        //Retour au menu
         afficherMenu();
 
     }
@@ -342,7 +344,7 @@ public class M2iBankUtils {
     public static void deconnexion(){
         System.out.println("******************************************************************");
         System.out.println("*** MENU M2iBank *************************************************");
-        System.out.println("*** Aurevoir et a Bientot ****************************************");
+        System.out.println("*** Au revoir et a Bientôt ****************************************");
         getScanner().close();
     }
 

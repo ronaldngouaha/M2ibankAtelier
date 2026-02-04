@@ -35,6 +35,7 @@ public class Transaction {
 
         Optional<String> titulaire = Optional.ofNullable(this.getCompte().getTitulaire());
 
+
         System.out.printf("-->> Titulaire %s: Montant: %f $, Type: %s; Id: %d %n", titulaire.orElse(""), this.getMontant(), this.getType(), this.getId());
 
     }

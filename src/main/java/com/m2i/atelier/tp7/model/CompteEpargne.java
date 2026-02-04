@@ -1,9 +1,9 @@
 package com.m2i.atelier.tp7.model;
 
 import com.m2i.atelier.tp6.model.InteretCalculable;
-import com.m2i.atelier.tp7.service.OperationBancaire;
 
-public non-sealed class CompteEpargne extends CompteBancaire implements InteretCalculable, OperationBancaire {
+
+public non-sealed class CompteEpargne extends CompteBancaire implements InteretCalculable {
 
     protected double tauxInteret;
 
@@ -68,6 +68,8 @@ public non-sealed class CompteEpargne extends CompteBancaire implements InteretC
     public void appliquerOperation() {
         // Calcul des intérêts
         solde += solde * tauxInteret / 100;
+
+        System.out.println("APPLIQUE  OP DEPUIS COMPTE ÉPARGNE");
     }
 
 

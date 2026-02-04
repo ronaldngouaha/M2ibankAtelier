@@ -18,11 +18,7 @@ public class Historique {
     }
 
     public static void afficherHistorique(long idCompte){
-
-        historiqueParCompte.get(idCompte).forEach(transaction -> {
-            TransactionServiceImpl transactionService= new TransactionServiceImpl();
-            transactionService.afficherDetails(transaction);
-        });
+        historiqueParCompte.get(idCompte).forEach(Transaction::afficherDetails);
     }
 
     public static List <Transaction> getTransactions(long idCompte){

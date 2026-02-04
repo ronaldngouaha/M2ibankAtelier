@@ -14,7 +14,7 @@ public class RetraitService extends AbstractTransactionService{
             System.out.println("Retrait effectué : -" + montant);
         } else {
             System.out.println("Retrait impossible (montant invalide ou solde insuffisant).");
-            System.out.println("Vous serez a decouvert");
+            System.out.println("Vous serez a découvert");
 
             compte.setSolde(0);
             double montantDecouvert=montant-compte.getSolde();
@@ -26,7 +26,7 @@ public class RetraitService extends AbstractTransactionService{
             }
 
         }
-
-        compte.afficherInfos();
+        this.afficheSolde();
+        //compte.afficherInfos();
     }
 }

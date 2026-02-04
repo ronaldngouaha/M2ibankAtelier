@@ -8,7 +8,6 @@ public class ClientPremium extends Client implements AvantageClient {
     private final double decouvertAutorise;
 
 
-
     public ClientPremium(String nom, String username, String email, double tauxRemuneration, double decouvertAutorise){
 
         super( nom,  username,  email);

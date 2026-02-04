@@ -11,13 +11,12 @@ public class DepotService extends AbstractTransactionService{
 
         if (montant > 0) {
 
-            compte.setSolde(compte.getSolde() + montant);
+            compte .setSolde(compte.getSolde() + montant);
             System.out.println("Dépôt effectué : +" + montant);
         } else {
             System.out.println("Montant invalide pour un dépôt.");
         }
-
-
-        compte.afficherInfos();
+        this.afficheSolde();
+       // compte.afficherInfos();
     }
 }
