@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.function.BiFunction;
 
 public class M2iBankUtils {
 
@@ -90,12 +91,15 @@ public class M2iBankUtils {
     public static double saisirMontant(Scanner sc){
         System.out.println("*****************************************************************");
         System.out.println("*** Montant Transaction *****************************************");
+
+
         return sc.nextDouble();
     }
 
     public static String saisirText(Scanner scanner, String message){
         System.out.println("*****************************************************************");
         System.out.println("*** "+message+ " *****************************************");
+
         return scanner.nextLine();
     }
 

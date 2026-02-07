@@ -28,7 +28,6 @@ public class Transaction {
     public Transaction(CompteBancaire compte, double montant, TypeOperation type, LocalDate date){
          this.id= UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
          this.compte=compte;
-
          if(montant<0){
              throw new  DonneeInvalideException ("Montant invalide");
          }
@@ -43,7 +42,6 @@ public class Transaction {
         System.out.printf("***TRX*** -->>ID: %d;  Titulaire %s: Montant: %.2f $, Type: %s; Compte: %d; Date: %s", getId(), titulaire.orElse("inconnu"), getMontant(), getType(), getCompte().getId(), getDate());
         System.out.println();
     }
-
 
     public Long getId() {
         return id;

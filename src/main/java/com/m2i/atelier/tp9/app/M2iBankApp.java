@@ -24,6 +24,12 @@ public class M2iBankApp {
         //Dans M2iBankApp, utilisez cette interface avec une expression lambda pour afficher le resulat d’un calcul
         System.out.println(calculateur.calculer(20,39));
 
+
+        //En Java, BiPredicate est une interface fonctionnelle qui prend deux paramètres et retourne un booléen (true ou false)
+        BiPredicate<Integer, Integer> estSuperieur = (a, b) -> a > b;
+        System.out.println(estSuperieur.test(10, 5)); // true
+
+
         Predicate<String> estLong= string -> string.length()>=5;
         System.out.println(estLong.test("Maman"));
         System.out.println(estLong.test("papa"));
@@ -36,9 +42,18 @@ public class M2iBankApp {
         System.out.println(ftTest2.apply(90));
 
 
+
+
+        BiFunction<Integer, Integer, Integer> ftAddition= Integer::sum; //BiFunction<T, U, R> → (T, U) -> R effectue une operation sur T ET U Et retourne le resultat dans R
+        BiFunction<Integer, Integer, Integer> ftMax= Integer::max;
+        BiFunction<Integer, Integer, Integer> ftMin= Integer::min;
+
+
         //pour afficher un message
         Consumer<String> display= System.out::println;
         display.accept("Hello World");
+
+
 
 
         Supplier<Double> supplierDouble= Math::random; //Supplier<T> → ne prend aucun paramètre
@@ -47,10 +62,6 @@ public class M2iBankApp {
         display.accept(String.valueOf(supplierDouble.get()));//.get() → retourne la valeur
         display.accept(String.valueOf(supplierInt.get()));//.get() → retourne la valeur
 
-
-        BiFunction<Integer, Integer, Integer> ftAddition= Integer::sum; //BiFunction<T, U, R> → (T, U) -> R effectue une operation sur T ET U Et retourne le resultat dans R
-        BiFunction<Integer, Integer, Integer> ftMax= Integer::max;
-        BiFunction<Integer, Integer, Integer> ftMin= Integer::min;
 
         int a=supplierInt.get(); int b=supplierInt.get();
         System.out.printf("%d+%d= %d\n",a,b, ftAddition.apply(a,b) );
@@ -61,6 +72,13 @@ public class M2iBankApp {
         BiFunction<Integer, Integer, String> concat = (x, y) -> x + "-" + y;
         System.out.println(concat.apply(3, 9)); // "3-9"
 
+
+
+
+        //En Java, BiConsumer est une interface fonctionnelle qui prend deux paramètres et ne retourne rien (void).
+        //Elle est dans java.util.function.
+        BiConsumer<Integer, String> cf= (st, df)-> System.out.println(" DE "+st+" d "+df);
+        cf.accept(2,"sfs");
 
         List<String> clients= new ArrayList<>();
 
@@ -90,6 +108,7 @@ public class M2iBankApp {
         comptes.add(6);
         comptes.add(9);
         comptes.add(90);
+
 
         System.out.println("afficherComptesUniques");
         System.out.println("**************************************");

@@ -4,6 +4,7 @@ package com.m2i.atelier.tp5.model;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
@@ -107,7 +108,4 @@ public class Transaction {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
 }

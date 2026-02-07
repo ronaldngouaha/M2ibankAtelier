@@ -1,7 +1,9 @@
-package com.m2i.atelier.tp7.model;
+package com.m2i.atelier.tp11.model;
 
 
-public final  class CompteCourant extends CompteBancaire  {
+import com.m2i.atelier.tp11.exceptions.SoldeInsuffisantException;
+
+public final  class CompteCourant extends CompteBancaire {
 
     private double decouvert=0.00;
 
@@ -9,6 +11,7 @@ public final  class CompteCourant extends CompteBancaire  {
     public CompteCourant(Client client, double solde, double decouvert) {
         super(client, solde);
         this.decouvert=decouvert;
+
     }
 
 
@@ -21,18 +24,14 @@ public final  class CompteCourant extends CompteBancaire  {
     }
 
     @Override
-    public void retirer(double montant) {
+    public void retirer(double montant) throws SoldeInsuffisantException {
 
         if (montant > 0 && this.getSolde() >= montant) {
             this.setSolde(this.getSolde() - montant);
             System.out.println("Retrait effectué : -" + montant);
         } else {
-            System.out.println("Retrait impossible (montant invalide ou solde insuffisant).");
-            System.out.println("Vous serez a decouvert");
 
-            this.setSolde(0);
-            double montantDecouvert=montant-this.getSolde();
-            this.setDecouvert(this.getDecouvert() + montantDecouvert);
+            throw new SoldeInsuffisantException("Retrait impossible (montant invalide ou solde insuffisant).");
 
         }
     }
@@ -53,6 +52,7 @@ public final  class CompteCourant extends CompteBancaire  {
     public double getDecouvert() {
         return decouvert;
     }
+
     public void setDecouvert(double decouvert) {
         this.decouvert = decouvert;
     }

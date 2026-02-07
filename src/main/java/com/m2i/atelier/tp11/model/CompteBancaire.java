@@ -1,12 +1,13 @@
-package com.m2i.atelier.tp7.model;
+package com.m2i.atelier.tp11.model;
 
 
-import com.m2i.atelier.tp7.service.OperationBancaire;
-import com.m2i.atelier.tp8.model.StatutCompte;
+
+
+import com.m2i.atelier.tp11.exceptions.SoldeInsuffisantException;
+import com.m2i.atelier.tp11.service.OperationBancaire;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-
 import java.util.UUID;
 
 public sealed abstract class CompteBancaire implements OperationBancaire permits CompteCourant, CompteEpargne {
@@ -14,7 +15,7 @@ public sealed abstract class CompteBancaire implements OperationBancaire permits
 
     private static int compteur=0;
 
-    protected StatutCompte statut;
+    private StatutCompte statut;
     protected String createdAt;
     protected double solde;
     protected Client client;
@@ -66,7 +67,7 @@ Incrémente compteur et affecte un ID unique
     }
 
     public abstract void afficherInfos();
-    public abstract void   retirer(double montant);
+    public abstract void   retirer(double montant) throws SoldeInsuffisantException;
     public abstract  void deposer(double montant);
 
 

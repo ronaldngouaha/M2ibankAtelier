@@ -29,6 +29,7 @@ public class MainTP10 {
         comptes.add(new CompteEpargne(clientPremium2, 3000, 0.23));
         comptes.add(new CompteCourant(clientPremium2, 790, 4000));
         HistoriqueOperation historiqueOperation= new HistoriqueOperation();
+
         for(CompteBancaire compte: comptes){
 
             Transaction transaction = new Transaction(compte,203, TypeOperation.DEPOT, LocalDate.now());
@@ -43,9 +44,13 @@ public class MainTP10 {
             compte.afficherInfos();
             System.out.println("--------------------");
 
-
-
         }
+
+        System.out.println("test->>>>>>>");
+        historiqueOperation.filtrerParMontant(203,206).forEach(Transaction::afficherDetails);
+
+        System.out.println("test->>>>>>>");
+        historiqueOperation.filtrerParType(TypeOperation.DEPOT).forEach(Transaction::afficherDetails);
 
         String chemin="public/media/operations.txt";
         //System.out.println("Répertoire courant : " + getRepertoireCourant());

@@ -1,4 +1,6 @@
-package com.m2i.atelier.tp7.model;
+package com.m2i.atelier.tp11.model;
+
+import com.m2i.atelier.tp11.exceptions.SoldeInsuffisantException;
 
 import com.m2i.atelier.tp6.model.InteretCalculable;
 
@@ -6,6 +8,7 @@ import com.m2i.atelier.tp6.model.InteretCalculable;
 public non-sealed class CompteEpargne extends CompteBancaire implements InteretCalculable {
 
     protected double tauxInteret;
+
 
     public CompteEpargne(Client client, double solde, double tauxInteret) {
         super(client, solde);
@@ -24,18 +27,18 @@ public non-sealed class CompteEpargne extends CompteBancaire implements InteretC
     }
 
     @Override
-    public void retirer(double montant) {
-
+    public void retirer(double montant) throws SoldeInsuffisantException {
 
         if (montant > 0 && this.getSolde() >= montant) {
             this.setSolde(this.getSolde() - montant);
             System.out.println("Retrait effectué : -" + montant);
         } else {
-            System.out.println("Retrait impossible (montant invalide ou solde insuffisant).");
 
+            throw new SoldeInsuffisantException("Retrait impossible (montant invalide ou solde insuffisant).");
 
         }
     }
+
 
     @Override
     public void deposer(double montant) {

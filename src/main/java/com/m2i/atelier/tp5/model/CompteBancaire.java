@@ -26,7 +26,6 @@ Incrémente compteur et affecte un ID unique
     public CompteBancaire(String titulaire, double solde){
         this.solde=solde;
         this.titulaire=titulaire;
-
         this.id= UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         compteur+=1;
         ZonedDateTime now = ZonedDateTime.now();
@@ -42,16 +41,12 @@ Incrémente compteur et affecte un ID unique
         this.solde = solde;
     }
     public String getTitulaire() {
-
         Optional<String> titulaire = Optional.ofNullable(this.titulaire);
-
         return titulaire.orElse("");
     }
     public void setTitulaire(String titulaire) {
         this.titulaire = titulaire;
     }
-
-
     public long getId() {
         return id;
     }

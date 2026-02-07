@@ -1,17 +1,24 @@
-package com.m2i.atelier.tp10.utils;
+package com.m2i.atelier.tp11.utils;
 
-import java.io.*;
+import com.m2i.atelier.tp11.model.CompteBancaire;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class FichierUtils {
 
- public   static void lireOperations(String chemin){
+     final static String directory ="public/media/account/";
+
+
+   public   static void lireOperations(String chemin){
 
      Consumer <String> ftDisplay= System.out::println;
      Consumer <String> ftDisplayError= System.err::println;
@@ -74,4 +81,32 @@ public class FichierUtils {
 
     }
 
+    public static void genererReleveAvecHorodatage(CompteBancaire compte){
+
+        LocalDateTime now= LocalDateTime.now();
+        String date= now.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        List<String> contentFile=new ArrayList<>();
+        String filename=directory +compte.getId()+"_txt";
+        try (BufferedReader reader= new BufferedReader(new FileReader(filename))){
+             contentFile=extraireFile(filename);
+            contentFile.add("Update Time: "+ date);
+            Files.write(Paths.get(filename),contentFile);
+
+            System.out.println("File updated "+filename);
+        }catch(IOException exception){
+            System.out.println(exception.getMessage());
+            /// Nous allons creer le fichier a ce niveau comme il n'existe pas encore.
+            contentFile.add("Nom du client : "+compte.getClient().getNom());
+            contentFile.add("Numéro de compte : "+compte.getId());
+            contentFile.add("Solde de compte : "+compte.getSolde()+" $");
+            contentFile.add("Date/heure de génération : "+date);
+            try {
+                Files.write(Paths.get(filename),contentFile);
+                System.out.println("File created "+filename);
+            } catch (IOException e) {
+               // throw new RuntimeException(e);
+                System.out.println(e.getMessage());
+            }
+        }
+    }
 }

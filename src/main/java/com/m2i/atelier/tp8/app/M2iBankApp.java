@@ -27,7 +27,9 @@ public class M2iBankApp  {
             }
         };
 
+        messageOperation.afficherMessage();
     }
+
 
 
     /*
@@ -46,8 +48,7 @@ public class M2iBankApp  {
         }
 
         comptes.forEach(CompteBancaire::afficherInfos);
-
-        comptes.stream().forEach(CompteBancaire::afficherInfos);
+        comptes.forEach(CompteBancaire::afficherInfos);
 
     }
 

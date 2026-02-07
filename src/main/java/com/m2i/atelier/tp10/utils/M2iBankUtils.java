@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.function.Predicate;
 
 public class M2iBankUtils {
 
@@ -123,8 +124,9 @@ public class M2iBankUtils {
     public static   Optional<CompteBancaire> trouverCompte(long idCompte, List<CompteBancaire> comptes){
 
 
+        Predicate <CompteBancaire> compteBancairePredicate= compteBancaire -> compteBancaire.getId()==idCompte;
         return comptes.stream()
-                .filter(compteBancaire -> compteBancaire.getId() == idCompte)
+                .filter(compteBancairePredicate)
                 .findFirst();
 
     }
@@ -164,6 +166,7 @@ public class M2iBankUtils {
         }
 
       String username=   M2iBankUtils.demanderIdClient(getScanner());
+
 
       Optional<Client> client= getClients().stream()
               .filter(client1 -> client1.getUsername().equals(username))

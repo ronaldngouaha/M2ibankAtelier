@@ -1,11 +1,10 @@
-package com.m2i.atelier.tp7.model;
+package com.m2i.atelier.tp11.model;
 
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class HistoriqueOperation {
@@ -26,29 +25,30 @@ public class HistoriqueOperation {
     }
 
     //cette methode filtre les transactions par type et retourne une liste
-    public List < Transaction> filtrerParType( TypeOperation type){
-        Predicate<TypeOperation> matchType= typeOperation -> typeOperation.equals(type);
+    public List <Transaction> filtrerParType(TypeOperation type){
+        Predicate<Transaction> matchType= transaction -> transaction.getType().equals(type);
         return   getTransactions().stream()
-                .filter(transaction -> matchType.test(transaction.getType()))
+                .filter(matchType)
                 .collect(Collectors.toList());
+
     }
     //cette methode filtre les transactions par date et retourne une liste
     public List <Transaction> filtrerParDate(LocalDate paramDate){
-
-
-        Predicate<LocalDate> compareDate= strVal-> strVal.equals(paramDate);
-
+        Predicate<Transaction> compareDate= strVal-> strVal.getDate().equals(paramDate);
         return   getTransactions().stream()
-                .filter(transaction -> compareDate.test(transaction.getDate()))
+
+                .filter(compareDate)
                 .collect(Collectors.toList());
     }
+
 
 
     // Cette methode filtre les transactions par montant minim et maxi et retourne une liste
     public List <Transaction> filtrerParMontant(double min, double max){
+        Predicate <Transaction> compare= transaction-> transaction.getMontant()>=min && transaction.getMontant()<=max;
 
      return   getTransactions().stream()
-               .filter(transaction -> transaction.getMontant()>=min && transaction.getMontant()<=max)
+               .filter(compare)
                .collect(Collectors.toList());
     }
 
