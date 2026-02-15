@@ -4,7 +4,8 @@ package com.m2i.atelier.tp12.model;
 import com.m2i.atelier.tp12.exceptions.DonneeInvalideException;
 
 import java.time.Instant;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -13,7 +14,7 @@ public class Transaction {
     private final Long id;
     private static int compteur=0;
 
-    private final LocalDate date;
+    private final String date;
     private final CompteBancaire compte;
     private final double montant;
     private final TypeOperation type;
@@ -37,7 +38,7 @@ public class Transaction {
          this.montant=montant;
          this.type=type;
          compteur+=1;
-         this.date=LocalDate.now();
+         this.date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
         this.horodatage = Instant.now(); // ⏱️ horodatage UTC
 
@@ -71,7 +72,7 @@ public class Transaction {
         return type;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 

@@ -2,6 +2,11 @@ package com.m2i.atelier.tp12.app;
 
 import com.m2i.atelier.tp12.service.BanquePartagee;
 
+import java.security.PublicKey;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 public class TestRaceCondition  {
 
     public static void main(String[] args) throws InterruptedException{
@@ -24,5 +29,77 @@ public class TestRaceCondition  {
 
         Thread.sleep(500);
         System.out.println("💰 Solde final : " + banque.getSolde());
+
+        Table table= new Table();
+        Chaise chaise= new Chaise();
+
+        Thread alice= new Thread(()->{
+            while (true){
+                if(table.verrou.tryLock()){
+                    try {
+                        if(chaise.verrou.tryLock()){
+                            try {
+                                System.out.println("Alice A LA TABLE ET LA CHAISE");
+                                break;
+                            }finally {
+                                chaise.verrou.unlock();
+                            }
+                        }
+                    }finally {
+                        table.verrou.unlock();
+                    }
+                }
+                System.out.println("Alice attend");
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        });
+
+
+        Thread bob= new Thread(()->{
+            while (true){
+                if(chaise.verrou.tryLock()){
+                    try {
+                        if(table.verrou.tryLock()){
+                            try {
+                                System.out.println("Bob A LA TABLE ET LA CHAISE");
+                                break;
+                            }finally {
+                                table.verrou.unlock();
+                            }
+                        }
+                    }finally {
+                        chaise.verrou.unlock();
+                    }
+                }
+                System.out.println("Bob attend");
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        });
+
+        Thread threadAlice= new Thread(alice, "Alice");
+        Thread threadBob= new Thread(bob, "Bob");
+        threadAlice.start();
+        threadBob.start();
+
     }
+
 }
+
+
+   class Chaise{
+       public  static ReentrantLock verrou= new ReentrantLock();
+        public Chaise(){}
+   }
+
+   class Table{
+    public  static ReentrantLock verrou= new ReentrantLock();
+    public Table(){}
+    }

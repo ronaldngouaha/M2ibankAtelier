@@ -1,5 +1,7 @@
 package com.m2i.atelier.tp3.model;
 
+
+
  enum TransactionType {
 
     DEBIT ("DEBIT"), CREDIT("CREDIT"), TRANSFER("TRANSFER");

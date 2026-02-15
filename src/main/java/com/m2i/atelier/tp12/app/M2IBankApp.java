@@ -76,8 +76,9 @@ public class M2IBankApp {
 
         //Generation du fichier pour un compte client
 
-        FichierUtils.genererReleveAvecHorodatage(comptes.get(1));
+       // FichierUtils.genererReleveAvecHorodatage(comptes.get(1));
 
+        FichierUtils.exporterTransactionsXLSX("clients.xlsx",historiqueOperation.getTransactions());
 
        //Ici on cree un objet transaction
         Transaction transaction = new Transaction(comptes.get(1),900.99, TypeOperation.DEPOT);
@@ -94,7 +95,11 @@ public class M2IBankApp {
         System.out.println("🌍 Heure UTC    : " + horodatage.toString());
 
         String cheminExcel="public/media/clients.xlsx";
-        FichierUtils.lireClients2(cheminExcel);
+        try {
+            FichierUtils.lireClients2(cheminExcel);
+        } catch (Exception e) {
+            System.err.println("Impossible de lire le fichier Excel : " + e.getMessage());
+        }
     }
 
 

@@ -19,7 +19,7 @@ public class ProcessUtils {
 
             BufferedReader reader= new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
-            System.out.println(STR."\{command} ------>>>>");
+            System.out.println(command + " ------>>>>");
             while ((line=reader.readLine())!=null){
                 System.out.println(line);
             }
@@ -69,7 +69,9 @@ public class ProcessUtils {
         Optional<ProcessHandle> handle= ProcessHandle.of(process.pid());
 
         handle.ifPresent(processHandle -> System.out.println(
-                STR."->>PID: \{processHandle.pid()} User: \{processHandle.info().user()} Instant demarrage: \{processHandle.info().startInstant().get()} Durree Exec: \{processHandle.info().totalCpuDuration().get().toString()}"
+                "->>PID: " + processHandle.pid() + " User: " + processHandle.info().user() +
+                " Instant demarrage: " + processHandle.info().startInstant().get() +
+                " Durree Exec: " + processHandle.info().totalCpuDuration().get().toString()
         ));
 
     }

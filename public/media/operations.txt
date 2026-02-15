@@ -33,3 +33,6 @@ Nombre de transactions 812.0 $
 Nombre total de comptes 4
 Solde global 7883.57 $
 Nombre de transactions 812.0 $
+Nombre total de comptes 4
+Solde global 7883.57 $
+Nombre de transactions 812.0 $
